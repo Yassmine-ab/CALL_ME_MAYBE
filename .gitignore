@@ -1,0 +1,6 @@
+# Virtual environments
+.venv
+
+# Documentation
+*.pdf
+Notes.md
