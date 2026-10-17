@@ -27,7 +27,7 @@ class ValueGenerationError(Exception):
 def _encode(model: Small_LLM_Model, text: str) -> list[int]:
     """Tokenize text into a flat list of token ids."""
     tensor = model.encode(text)
-    return tensor[0].tolist()
+    return [int(token_id) for token_id in tensor[0].tolist()]
 
 
 def select_function(
@@ -136,7 +136,7 @@ def generate_function_call(
     vocabulary: dict[int, str],
     functions: list[FunctionDefinition],
     user_prompt: str,
-) -> dict:
+) -> dict[str, object]:
     """Generate a full function call
     (name + typed parameters) for one prompt."""
     function = select_function(model, vocabulary, functions, user_prompt)

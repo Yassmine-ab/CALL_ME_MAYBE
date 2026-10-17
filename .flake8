@@ -1,0 +1,12 @@
+[flake8]
+max-line-length = 79
+# llm_sdk is the SDK provided with the 42 activity: it is vendored as-is
+# and is intentionally not linted here.
+exclude =
+    .git,
+    .venv,
+    .uv-cache,
+    __pycache__,
+    build,
+    dist,
+    llm_sdk

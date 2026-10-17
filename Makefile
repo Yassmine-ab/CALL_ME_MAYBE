@@ -20,10 +20,10 @@ install:
 				@uv sync
 
 run:
-				@uv run python -m src
+				@uv run python -m src $(ARGS)
 
 debug:
-				@uv run python -m pdb -m src
+				@uv run python -m pdb -m src $(ARGS)
 
 clean:
 				$(call ANIMATION,Removing compiled files and caches)
@@ -31,10 +31,10 @@ clean:
 				@printf "$(GREEN)✓$(DEFAULT) Cleaned\n"
 
 lint:
-				@flake8 . && mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs
+				@uv run flake8 . && uv run mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs
 
 lint-strict:
-				@flake8 . && mypy . --strict
+				@uv run flake8 . && uv run mypy . --strict --no-incremental
 
 test:
 				$(call ANIMATION,Running tests)

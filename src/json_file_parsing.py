@@ -1,5 +1,9 @@
 from json import JSONDecodeError, load
+from typing import TypeVar
+
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
+
+ModelT = TypeVar("ModelT", bound=BaseModel)
 
 
 class FunctionParameter(BaseModel):
@@ -34,8 +38,8 @@ class FunctionCallingTest(BaseModel):
 
 
 def parse_json_list(
-        file_path: str, model_cls: type[BaseModel]
-        ) -> list[BaseModel]:
+        file_path: str, model_cls: type[ModelT]
+        ) -> list[ModelT]:
     """Load a JSON array from file_path and validate each item as model_cls."""
     try:
         with open(file_path, "r", encoding="utf-8") as file:

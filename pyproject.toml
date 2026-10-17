@@ -1,18 +1,35 @@
 [project]
 name = "call-me-maybe"
 version = "0.1.0"
-description = "Add your description here"
+description = "Function calling with constrained decoding on a small local LLM (Qwen3-0.6B)."
 readme = "README.md"
 authors = [
     { name = "yassabda", email = "yassmine.abdallah@learner.42.tech" }
 ]
 requires-python = ">=3.10"
+keywords = ["llm", "function-calling", "constrained-decoding", "transformers"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 dependencies = [
     "huggingface-hub>=1.29.0",
     "numpy>=2.2.6",
     "pydantic>=2.13.5",
     "torch>=2.13.0",
     "transformers>=5.16.1",
+]
+
+[project.urls]
+Repository = "https://github.com/imyassmine/call-me-maybe"
+
+[dependency-groups]
+dev = [
+    "flake8>=7.4.1",
+    "mypy>=2.3.1",
+    "pytest>=9.1.1",
 ]
 
 [build-system]
@@ -22,3 +39,24 @@ build-backend = "uv_build"
 [tool.uv.build-backend]
 module-name = "src"
 module-root = ""
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+
+[tool.mypy]
+python_version = "3.10"
+exclude = ["^llm_sdk/"]
+warn_return_any = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+
+# llm_sdk is the SDK provided with the 42 activity: it is vendored as-is,
+# so its files are not type-checked as part of this project.
+[[tool.mypy.overrides]]
+module = ["llm_sdk", "llm_sdk.*"]
+follow_imports = "skip"
+ignore_errors = true
