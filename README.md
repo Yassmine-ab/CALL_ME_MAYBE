@@ -391,18 +391,3 @@ Honest boundaries of the current implementation:
   [`llama.cpp` grammars](https://github.com/ggml-org/llama.cpp/blob/master/grammars/README.md):
   production implementations of the same constrained-decoding idea
 - [uv documentation](https://docs.astral.sh/uv/)
-- Course material provided with the 42 activity (function calling, LLM SDK reference)
-
-## AI-assisted development
-
-AI assistants were used throughout this project as collaborative design, debugging
-and documentation partners — not as a code generator to copy-paste unreviewed:
-
-- **Debugging:** diagnosing the two concrete runtime bugs described in
-  [Challenges faced](#challenges-faced) from actual `make run` output and tracebacks,
-  not hypothetically.
-- **Documentation and quality tooling:** drafting the README, tests and CI workflow
-  based on the implementation as actually built.
-
-Every generated change was reviewed, run and understood — the unit tests, linter and
-CI exist precisely so that the behaviour is verified rather than trusted.
